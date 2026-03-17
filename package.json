@@ -1,0 +1,30 @@
+{
+  "name": "ai-tools",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "cli tool to supercharge your development workflow with ai.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc && chmod +x dist/cli.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "ai-tools": "./dist/cli.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.13.6",
+    "commander": "^14.0.3",
+    "dotenv": "^17.3.1",
+    "ora": "^9.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

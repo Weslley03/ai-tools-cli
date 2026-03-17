@@ -1,0 +1,1 @@
+export type LogType = "review" | "commit" | "error"
