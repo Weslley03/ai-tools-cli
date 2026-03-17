@@ -2,6 +2,9 @@
 
 cli tool to supercharge your development workflow with ai.
 
+<img width="1398" height="646" alt="image" src="https://github.com/user-attachments/assets/937be828-a977-4e59-87e4-516a1bc2e5b0" />
+
+
 ## features
 
 * ai-powered code review
