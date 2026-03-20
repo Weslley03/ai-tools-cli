@@ -22,6 +22,8 @@ program
 
 program.command("commit")
   .description("generate git commit message")
-  .action(commitCommand)
+  .option("--base <branch>", "base branch to compare")
+  .option("--staged", "review only staged changes")
+  .action((options) => commitCommand(options))
 
 program.parse()
