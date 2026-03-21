@@ -1,17 +1,17 @@
 {
   "name": "ai-tools",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "cli tool to supercharge your development workflow with ai.",
   "main": "index.js",
   "scripts": {
-    "build": "tsc && chmod +x dist/cli.js"
+    "build": "tsc && chmod +x dist/cli.js && chmod +x bin/ai-tools.cjs"
   },
   "engines": {
     "node": ">=20"
   },
   "bin": {
-    "ai-tools": "./dist/cli.js"
+    "ai-tools": "./bin/ai-tools.cjs"
   },
   "keywords": [],
   "author": "",

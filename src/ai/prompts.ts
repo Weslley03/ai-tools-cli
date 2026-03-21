@@ -24,6 +24,7 @@ export function commitPrompt(diff: string) {
     - Scope is optional but use it when obvious (e.g. auth, api, ui, db)
     - Description: max 72 chars, imperative mood (\"add\", not \"added\")
     - After the subject line, add ONE blank line then a short body (2-4 lines max) explaining WHAT changed and WHY, if it's not obvious
+    - Each body line must start with "- "
     - Body lines also ALL lowercase
     - No markdown, no quotes around the message
     - Output ONLY the commit message, nothing else
