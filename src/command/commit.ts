@@ -21,15 +21,15 @@ export async function commitCommand(options: { base?: string; staged?: boolean }
 
   const spinner = ora("thinking about your code...").start()
 
-  try {
-    const message = await askAI(prompt)
+  const message = await askAI(prompt)
 
-    spinner.succeed("git message built")
-
-    await writer("commit", message)
-    print.result(message)
-  } catch (err) {
+  if (!message) {
     spinner.fail("failed to generate commit messages")
-    throw err
+    return
   }
+
+  spinner.succeed("git message built")
+
+  await writer("commit", message)
+  print.result(message)
 }

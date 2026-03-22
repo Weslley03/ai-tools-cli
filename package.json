@@ -1,7 +1,7 @@
 {
   "name": "ai-tools",
   "type": "module",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "cli tool to supercharge your development workflow with ai.",
   "main": "index.js",
   "scripts": {

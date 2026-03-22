@@ -21,15 +21,15 @@ export async function reviewCommand(options: { base?: string; staged?: boolean }
 
   const spinner = ora("thinking about your code...").start()
 
-  try {
-    const review = await askAI(prompt)
+  const review = await askAI(prompt)
 
-    spinner.succeed("review completed")
-
-    await writer("review", review)
-    print.result(review)
-  } catch (err) {
+  if (!prompt) {
     spinner.fail("failed to generate review")
-    throw err
+    return
   }
+
+  spinner.succeed("review completed")
+
+  await writer("review", review)
+  print.result(review)
 }
