@@ -23,7 +23,7 @@ export async function reviewCommand(options: { base?: string; staged?: boolean }
 
   const review = await askAI(prompt)
 
-  if (!prompt) {
+  if (!review) {
     spinner.fail("failed to generate review")
     return
   }
