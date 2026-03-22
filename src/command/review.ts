@@ -1,9 +1,9 @@
 import { getGitDiff } from "../git/gitMethods.js"
 import { askAI } from "../ai/openrouter.js"
-import { reviewPrompt } from "../ai/prompts.js"
 import { print } from "../print/print.js"
 import { writer } from "../log/index.js"
 import ora from "ora"
+import { buildPrompt } from "../config/loader.js"
 
 export async function reviewCommand(options: { base?: string; staged?: boolean }): Promise<void> {
 
@@ -17,7 +17,7 @@ export async function reviewCommand(options: { base?: string; staged?: boolean }
     return
   }
 
-  const prompt = reviewPrompt(diff)
+  const prompt = buildPrompt("review", { diff })
 
   const spinner = ora("thinking about your code...").start()
 

@@ -4,9 +4,9 @@ import { writer } from "../log/index.js"
 import { serializeError } from "../log/utils.js"
 import type { OpenRouterAxiosError } from "../type/OpenRouterErrorData.js"
 import { print } from "../print/print.js"
-import { FREE_MODEL_POOLS } from "./models.js"
 import pkg from '../../package.json' with { type: 'json' }
 import type { AIResponse } from "../type/AIResponse.js"
+import { getActivePools } from "../config/loader.js"
 
 const version = pkg.version
 
@@ -34,27 +34,26 @@ async function tryModels(models: string[], prompt: string): Promise<AIResponse> 
 }
 
 async function requestToAI(prompt: string): Promise<AIResponse | null> {
-  const pools = [
-    { name: 'general', models: FREE_MODEL_POOLS.general },
-    { name: 'fallback', models: FREE_MODEL_POOLS.fallback },
-    { name: 'cheap', models: FREE_MODEL_POOLS.cheap },
-  ]
+  const pools = getActivePools()
 
-  for (let i = 0; i < pools.length; i++) {
-    const pool = pools[i]!
+  const entries = (["general", "fallback", "cheap"] as const)
+    .map(name => ({ name, models: pools[name] }))
+    .filter(p => p.models?.length > 0)
+
+  for (let i = 0; i < entries.length; i++) {
+    const pool = entries[i]!
 
     try {
       print.info(`trying ${pool.name} pool`)
       return await tryModels(pool.models, prompt)
     } catch (err) {
       const message = (err as Error).message
+      const isLast = i === entries.length - 1
 
-      if (i < pools.length - 1) {
-        print.warn(`${pool.name} failed: ${message}. trying next...`)
-      } else {
-        print.error(`all pools failed. last error: ${message}`)
+      isLast
+        ? print.error(`all pools failed. last error: ${message}`)
+        : print.warn(`${pool.name} failed: ${message}. trying next...`)
       }
-    }
   }
 
   return null
@@ -63,13 +62,12 @@ async function requestToAI(prompt: string): Promise<AIResponse | null> {
 export async function askAI(prompt: string) {
   try {
     const result = await requestToAI(prompt)
-    if (!result?.content || !result?.model) throw new Error()
+    if (!result?.content || !result?.model) throw new Error('empty response')
 
     print.info(`result by model: ${result.model}`)
     return result.content
   } catch (err) {
     const error = err as OpenRouterAxiosError
-    
     const message = error.response?.data?.error?.message ?? "openrouter request failed"
     
     print.error("openrouter request failed. for more details, please check the logs.")

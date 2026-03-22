@@ -1,9 +1,9 @@
 import { getGitDiff } from "../git/gitMethods.js"
 import { askAI } from "../ai/openrouter.js"
-import { commitPrompt } from "../ai/prompts.js"
 import { print } from "../print/print.js"
 import { writer } from "../log/index.js"
 import ora from "ora"
+import { buildPrompt } from "../config/loader.js"
 
 export async function commitCommand(options: { base?: string; staged?: boolean }): Promise<void> {
 
@@ -17,7 +17,7 @@ export async function commitCommand(options: { base?: string; staged?: boolean }
     return
   }
 
-  const prompt = commitPrompt(diff)
+  const prompt = buildPrompt("commit", { diff })
 
   const spinner = ora("thinking about your code...").start()
 

@@ -5,13 +5,16 @@ import "dotenv/config"
 import { Command } from "commander"
 import { reviewCommand } from "./command/review.js"
 import { commitCommand } from "./command/commit.js"
+import pkg from '../package.json' with { type: 'json' }
+
+const version = pkg.version
 
 const program = new Command()
 
 program
   .name("ai-tools")
   .description("ai dev assistant")
-  .version("1.0.0")
+  .version(version)
 
 program
   .command("review")

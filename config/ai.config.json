@@ -1,0 +1,52 @@
+{
+  "mode": "free",
+
+  "models": {
+    "free": {
+      "pools": {
+        "general": [
+          "qwen/qwen3-next-80b-a3b-instruct:free",
+          "mistralai/mistral-small-3.1-24b-instruct:free",
+          "openai/gpt-oss-20b:free"
+        ],
+        "fallback": [
+          "qwen/qwen3-coder:free",
+          "meta-llama/llama-3.3-70b-instruct:free",
+          "openai/gpt-oss-120b:free"
+        ],
+        "cheap": [
+          "stepfun/step-3.5-flash:free",
+          "openai/gpt-oss-20b:free",
+					"minimax/minimax-m2.5:free"
+        ]
+      }
+    },
+    "pro": {
+      "pools": {
+        "general": [
+          "anthropic/claude-3.5-sonnet",
+          "openai/gpt-4o",
+          "google/gemini-2.0-flash-001"
+        ],
+        "fallback": [
+          "mistralai/mistral-7b-instruct:free",
+          "google/gemma-3-27b-it:free"
+        ],
+        "cheap": [
+          "openai/gpt-4o-mini"
+        ]
+      }
+    }
+  },
+
+  "prompts": {
+    "review": {
+      "system": "You are a senior fullstack engineer doing a thorough code review.",
+      "template": "Analyse the following git diff from a pull request and provide a structured review covering:\n1. **Bugs & correctness issues** — logic errors, edge cases, null/undefined risks\n2. **Security concerns** — injection, exposure of secrets, auth issues\n3. **Performance** — unnecessary re-renders, N+1 queries, heavy operations\n4. **Code quality** — readability, naming, duplication, SOLID principles\n5. **Quick wins** — small improvements worth doing right now\nBe direct and specific. Point to the exact lines when relevant.\nIf something looks good, say so briefly — focus energy on real issues.\n{{diff}}"
+    },
+    "commit": {
+      "system": "You are a developer writing git commit messages.",
+      "template": "Based on the following diff, write a single conventional commit message.\nRules:\n- ALL lowercase, no exceptions\n- Format: <type>(<scope>): <short description>\n- Types: feat, fix, refactor, style, test, docs, chore, perf\n- Scope is optional but use it when obvious (e.g. auth, api, ui, db)\n- Description: max 72 chars, imperative mood\n- After the subject line, add ONE blank line then a short body (2-4 lines max)\n- Each body line must start with \"- \"\n- Body lines also ALL lowercase\n- No markdown, no quotes around the message\n- Output ONLY the commit message, nothing else\n{{diff}}"
+    }
+  }
+}
