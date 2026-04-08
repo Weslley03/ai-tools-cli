@@ -3,6 +3,7 @@
 > cli tool to supercharge your development workflow with ai.
 
 <img width="1398" height="646" alt="image" src="https://github.com/user-attachments/assets/937be828-a977-4e59-87e4-516a1bc2e5b0" />
+<img width="1454" height="413" alt="Captura de tela de 2026-04-07 12-21-40" src="https://github.com/user-attachments/assets/f69ddf07-fd08-44f1-9c41-8a16fb6652d8" />
 
 ---
 
