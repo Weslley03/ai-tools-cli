@@ -46,7 +46,7 @@
     },
     "commit": {
       "system": "You are a developer writing git commit messages.",
-      "template": "Based on the following diff, write a single conventional commit message.\nRules:\n- ALL lowercase, no exceptions\n- Format: <type>(<scope>): <short description>\n- Types: feat, fix, refactor, style, test, docs, chore, perf\n- Scope is optional but use it when obvious (e.g. auth, api, ui, db)\n- Description: max 72 chars, imperative mood\n- After the subject line, add ONE blank line then a short body (2-4 lines max)\n- Each body line must start with \"- \"\n- Body lines also ALL lowercase\n- No markdown, no quotes around the message\n- Output ONLY the commit message, nothing else\n{{diff}}"
+      "template": "Based on the following diff, write a single conventional commit message.\nRules:\n- ALL lowercase, no exceptions\n- Format: <type>(<scope>): <short description>\n- Types: feature, fix, refactor, style, test, docs, chore, perf\n- Scope is optional but use it when obvious (e.g. auth, api, ui, db)\n- Description: max 72 chars, imperative mood\n- After the subject line, add ONE blank line then a short body (2-4 lines max)\n- Each body line must start with \"- \"\n- Body lines also ALL lowercase\n- No markdown, no quotes around the message\n- Output ONLY the commit message, nothing else\n{{diff}}"
     }
   }
 }
